@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML and CSS</title>
+    <style>
+        @font-face {
+            font-family: 'myText';
+            src: url(./fonts/static/GoogleSansCode-Regular.ttf);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'myText';
+            color: aliceblue;
+        }
+
+        html,
+        body {
+            background-color: #031119;
+        }
+
+        .container {
+            width: 100%;
+        }
+
+        .display-container {
+            width: 100%;
+            padding: 15px;
+            /* background-color: aqua; */
+        }
+
+        .display {
+            width: 100%;
+            min-height: 400px;
+            background-color: #031119;
+            /* border: 1px solid lightcyan; */
+            box-shadow: 0 0 10px white;
+            border-radius: 10px;
+            padding: 20px;
+            /* display: flex;
+            align-items: center;
+            justify-content: center; */
+        }
+
+        .editor-container .mytextarea {
+            width: 100%;
+            min-height: 350px;
+            background-color: #031119;
+            outline: none;
+            color: greenyellow;
+            padding: 20px;
+            font-size: 18px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        /*  */
+        .editor-container {
+            width: 100%;
+            min-height: 300px;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            padding: 15px;
+            flex-wrap: wrap;
+            /* margin-bottom: 150px; */
+        }
+
+        .html-container,
+        .css-container {
+            /* height: 400px; */
+            min-width: 300px;
+            min-height: 200px;
+            /* background-color: blueviolet; */
+            flex: 1 1 auto;
+            padding: 2px;
+        }
+
+        .title-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            padding: 10px 0px;
+        }
+
+        .runCode {
+            width: 200px;
+            margin: 20px;
+            min-height: 50px;
+            background-color: blueviolet;
+            color: #031119;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.5s ease;
+        }
+
+        .runCode:hover {
+            box-shadow: 0 0 20px blueviolet;
+        }
+
+        footer {
+            padding-bottom: 100px;
+            /* background-color: aqua; */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="display-container">
+            <div class="display">
+
+            </div>
+        </div>
+        <div class="editor-container">
+            <div class="html-container">
+                <div class="title-container" style="background-color: crimson;">
+                    <img src="./img/html-logo.png" alt="" style="width: 30px; height: 30px;">
+                    <h3>HTML</h3>
+                </div>
+                <textarea class="mytextarea html" name="" id=""></textarea>
+            </div>
+            <div class="css-container">
+                <div class="title-container" style="background-color: darkcyan;">
+                    <img src="./img/css-logo.png" alt="" style="width: 30px; height: 33px; padding: 3px;">
+                    <h3>CSS</h3>
+                </div>
+                <textarea class="mytextarea css" name="" id=""></textarea>
+            </div>
+        </div>
+        <footer>
+            <div class="runCode">
+                <h2>Run Code</h2>
+            </div>
+        </footer>
+    </div>
+    <!-- <script>
+        let runCode = document.querySelector('.runCode');
+        let display = document.querySelector('.display')
+        
+        runCode.addEventListener('click', () => {
+            let html = document.querySelector('.html').value;
+            let css = document.querySelector('.css').value;
+
+            display.innerHTML = `
+            ${html} <style> ${css} </style>
+        `;
+        });
+
+    </script> -->
+    <script>
+        const runCode = document.querySelector('.runCode');
+        const display = document.querySelector('.display');
+        const htmlTextarea = document.querySelector('.html');
+        const cssTextarea = document.querySelector('.css');
+
+        // Load saved code from localStorage on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedHTML = localStorage.getItem('userHTML') || '';
+            const savedCSS = localStorage.getItem('userCSS') || '';
+
+            htmlTextarea.value = savedHTML;
+            cssTextarea.value = savedCSS;
+
+            // If saved content exists, render it
+            if (savedHTML || savedCSS) {
+                display.innerHTML = `${savedHTML}<style>${savedCSS}</style>`;
+            }
+        });
+
+        runCode.addEventListener('click', () => {
+            const html = htmlTextarea.value;
+            const css = cssTextarea.value;
+
+            // Save to localStorage
+            localStorage.setItem('userHTML', html);
+            localStorage.setItem('userCSS', css);
+
+            // Render to display
+            display.innerHTML = `${html}<style>${css}</style>`;
+        });
+    </script>
+
+</body>
+
+</html>
