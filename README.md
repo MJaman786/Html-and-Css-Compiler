@@ -12,7 +12,4 @@ A simple in-browser HTML and CSS live preview editor built with pure HTML, CSS, 
 - 🌓 Custom styling with a dark theme and custom fonts
 - 📱 Mobile-friendly layout
 
----
-
-## 📂 Project Structure
 
